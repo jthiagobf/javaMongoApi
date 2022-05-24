@@ -27,12 +27,20 @@ public class FuncionarioServiceimpl implements FuncionarioService{
 				.findById(codigo)
 				.orElseThrow(() -> new IllegalArgumentException("Funcionario inexistente"));
 	}
-
+	
+	
 	@Override
 	public Funcionario criar(Funcionario funcionario) {
+		
+		Funcionario chefe =
+				this.funcionarioRepository
+				.findById(funcionario.getChefe().getCodigo())
+				.orElseThrow(() -> new IllegalArgumentException("Chefe inexistente"));
+		
+		funcionario.setChefe(chefe);
+		
 		return this.funcionarioRepository.save(funcionario);
 	}
-
 	
 
 }
