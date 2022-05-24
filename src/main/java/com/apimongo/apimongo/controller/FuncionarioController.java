@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.apimongo.apimongo.model.Funcionario;
@@ -36,5 +37,17 @@ public class FuncionarioController {
 		return this.funcionarioService.criar(funcionario);
 	}
 	
+	@GetMapping("/range")
+	public List<Funcionario> listarFuncionarioPorRangeDeIdade(
+			@RequestParam("de") Integer de, 
+			@RequestParam("ate") Integer ate) {
+		return this.funcionarioService.listarFuncionarioPorRangeDeIdade(de, ate);
+	}
+	
+	@GetMapping("/por-nome")
+	public List<Funcionario> listarFuncionarioPorNome(
+			@RequestParam("nome") String nome) {
+		return this.funcionarioService.listarFuncionarioPorNome(nome);
+	}
 	
 }
